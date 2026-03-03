@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content" class="col-md-5">
+    <h2>Sửa sản phẩm</h2>
+    <form th:action="@{/products/edit}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-2">
+            <label class="form-label text-muted mb-0">Name</label>
+            <input type="text" th:field="*{name}" class="form-control">
+            <div class="alert alert-warning py-1 mt-1 border-0" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label text-muted mb-0">Price:</label>
+            <input type="number" th:field="*{price}" class="form-control">
+            <div class="alert alert-warning py-1 mt-1 border-0" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-muted mb-0">Category:</label>
+            <select th:field="*{categoryName}" class="form-select w-50">
+                <option value="Điện thoại">Điện thoại</option>
+                <option value="Laptop">Laptop</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Cập nhật</button>
+        <a th:href="@{/products}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+</body>
+</html>

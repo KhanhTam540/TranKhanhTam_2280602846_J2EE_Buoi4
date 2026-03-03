@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content">
+    <a th:href="@{/products/create}" class="btn btn-primary mb-3">Create New Product</a>
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+        <tr>
+            <th>#</th><th>Name</th><th>Price</th><th>Image</th><th>Category Name</th><th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p, state : ${products}">
+            <td th:text="${state.count}"></td>
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.price}"></td>
+            <td>
+                <img th:src="@{'/images/' + ${p.image}}" width="80" class="img-thumbnail" th:if="${p.image}">
+            </td>
+            <td th:text="${p.categoryName}"></td>
+            <td>
+                <a th:href="@{/products/edit/{id}(id=${p.id})}" class="btn btn-secondary btn-sm">Edit</a>
+                <a th:href="@{/products/delete/{id}(id=${p.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Bạn có chắc muốn xóa?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
